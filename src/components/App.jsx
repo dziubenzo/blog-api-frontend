@@ -1,9 +1,14 @@
-import styles from './App.module.scss';
+import css from './App.module.scss';
+import Router from './Router';
 
 function App() {
   return (
     <>
-      <div className={styles.test}>Working!</div>
+      <header>Some header</header>
+      <main>
+        <Router />
+      </main>
+      <footer>Some footer</footer>
     </>
   );
 }
