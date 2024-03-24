@@ -1,21 +1,23 @@
-import { useEffect } from 'react';
-import { Outlet, useNavigate, useNavigation } from 'react-router-dom';
+import { Outlet, useLoaderData, useNavigation } from 'react-router-dom';
+import Header from './Header';
 
 function App() {
   const { state } = useNavigation();
   const isLoading = state === 'loading';
-  const navigate = useNavigate();
-
-  // Redirect to '/posts' immediately
-  // This ensures that the useNavigation hook combined with loaders work as I would like them to
-  useEffect(() => {
-    navigate('/posts');
-  }, [navigate]);
+  const { posts, comments } = useLoaderData();
 
   return (
     <>
-      <header>Some header</header>
-      <main>{isLoading ? 'Loading' : <Outlet />}</main>
+      <header>
+        <Header postsCount={posts.length} commentsCount={comments.length} />
+      </header>
+      <main>
+        {isLoading ? (
+          <h1>Loading posts...</h1>
+        ) : (
+          <Outlet context={[posts, comments]} />
+        )}
+      </main>
       <footer>Some footer</footer>
     </>
   );
