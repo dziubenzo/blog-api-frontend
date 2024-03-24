@@ -1,5 +1,6 @@
 import { Outlet, useLoaderData, useNavigation } from 'react-router-dom';
 import Header from './Header';
+import Footer from './Footer';
 
 function App() {
   const { state } = useNavigation();
@@ -18,7 +19,9 @@ function App() {
           <Outlet context={[posts, comments]} />
         )}
       </main>
-      <footer>Some footer</footer>
+      <footer>
+        <Footer />
+      </footer>
     </>
   );
 }
