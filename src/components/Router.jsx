@@ -1,23 +1,22 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ErrorPage from './ErrorPage';
 import Posts from './Posts';
-import { postsLoader } from '../helpers';
+import { dataLoader } from '../helpers';
 import App from './App';
 
 function Router() {
   const router = createBrowserRouter([
     {
-      path: '/',
       element: <App />,
       errorElement: <ErrorPage />,
+      loader: dataLoader,
       children: [
         {
-          path: 'posts',
+          path: '/',
           element: <Posts />,
-          loader: postsLoader,
         },
         {
-          path: 'posts/:postslug',
+          path: ':postslug',
           element: <h1>Single post goes here</h1>,
         },
       ],
