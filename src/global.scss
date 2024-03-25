@@ -2,8 +2,16 @@
 
 $background-colour: #0a1828;
 $primary-colour: #bfa181;
+$primary-colour-icon: invert(72%) sepia(13%) saturate(801%) hue-rotate(350deg)
+  brightness(91%) contrast(86%);
 $secondary-colour: #178582;
+$secondary-colour-icon: invert(42%) sepia(68%) saturate(454%) hue-rotate(129deg)
+  brightness(89%) contrast(98%);
 $font-family: 'Work Sans', sans-serif;
+$postcard-shadow-dark-theme:
+  rgba(255, 255, 255, 0.1) 0px 8px 24px,
+  rgba(255, 255, 255, 0.1) 0px 16px 56px,
+  rgba(255, 255, 255, 0.1) 0px 24px 80px;
 
 * {
   margin: 0;
@@ -64,6 +72,67 @@ footer {
   }
 }
 
+main {
+  margin: 3em 0;
+}
+
+.posts {
+  display: grid;
+  gap: 48px;
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.post-card {
+  outline: 2px solid $secondary-colour;
+  border-radius: 8px;
+  padding: 1em;
+  cursor: pointer;
+
+  .title {
+    padding-bottom: 0.5em;
+  }
+
+  .content {
+    font-style: italic;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .content,
+  .author,
+  .created-date {
+    padding: 0.5em 0;
+  }
+
+  .author-name,
+  .likes-count,
+  .comments-count {
+    font-weight: 700;
+  }
+
+  .likes-and-comments {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding-top: 1em;
+  }
+
+  div[class*='wrapper'] {
+    display: flex;
+    gap: 6px;
+  }
+
+  img {
+    height: 24px;
+    background-color: initial;
+    filter: $primary-colour-icon;
+  }
+}
+
 /* 
 Hover effects
  */
@@ -85,9 +154,20 @@ Hover effects
   header {
     a {
       transition: all 0.2s ease-in;
+
       &:hover {
         color: $secondary-colour;
       }
+    }
+  }
+
+  .post-card {
+    transition: all 0.2s ease-in;
+
+    &:hover {
+      transform: scale(1.03);
+      outline: 3px solid $secondary-colour;
+      box-shadow: $postcard-shadow-dark-theme;
     }
   }
 }
