@@ -3,6 +3,7 @@ import ErrorPage from './ErrorPage';
 import Posts from './Posts';
 import { dataLoader } from '../helpers';
 import App from './App';
+import Post from './Post';
 
 function Router() {
   const router = createBrowserRouter([
@@ -16,8 +17,8 @@ function Router() {
           element: <Posts />,
         },
         {
-          path: ':postslug',
-          element: <h1>Single post goes here</h1>,
+          path: ':postSlug',
+          element: <Post />,
         },
       ],
     },
