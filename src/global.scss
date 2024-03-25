@@ -145,8 +145,12 @@ main {
 }
 
 .like-post {
+  button {
+    width: 48px;
+    border: none;
+  }
+
   img {
-    height: 48px;
     background-color: initial;
     filter: $primary-colour-icon;
     cursor: pointer;
