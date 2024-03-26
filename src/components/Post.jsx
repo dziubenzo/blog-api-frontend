@@ -7,6 +7,7 @@ import {
   checkIfElementLiked,
   removeElementFromLocalStorage,
 } from '../helpers';
+import CommentForm from './CommentForm';
 
 function Post() {
   // Get post slug
@@ -113,6 +114,9 @@ function Post() {
           <h2>Be the first to comment!</h2>
         )}
         {renderComments()}
+      </div>
+      <div className="comment-form">
+        <CommentForm />
       </div>
     </div>
   );
