@@ -9,7 +9,7 @@ import {
 
 function Comment({ comment }) {
   // Destructure comment into useful parts
-  const { author, content, create_date, likes, avatar_colour, post } = comment;
+  const { author, content, create_date, avatar_colour, post } = comment;
   // Get first letter of nickname and uppercase it
   const firstLetter = author[0].toUpperCase();
 
@@ -86,7 +86,7 @@ function Comment({ comment }) {
         >
           <button type="submit" disabled={isButtonDisabled}>
             <img
-              src={isCommentLiked ? 'liked.svg' : 'likes.svg'}
+              src={isCommentLiked ? 'liked.svg' : 'like.svg'}
               alt={
                 isCommentLiked ? 'Unlike Icon - Comment' : 'Like Icon - Comment'
               }

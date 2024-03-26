@@ -1,5 +1,5 @@
 import { useOutletContext, useParams } from 'react-router-dom';
-import { formatDistanceToNow } from 'date-fns';
+import { format, formatDistanceToNow } from 'date-fns';
 import Comment from './Comment';
 import { useState } from 'react';
 import {
@@ -86,7 +86,7 @@ function Post() {
           <form method="post" onSubmit={isPostLiked ? unlikePost : likePost}>
             <button type="submit" disabled={isButtonDisabled}>
               <img
-                src={isPostLiked ? 'liked.svg' : 'likes.svg'}
+                src={isPostLiked ? 'liked.svg' : 'like.svg'}
                 alt={isPostLiked ? 'Unlike Icon - Post' : 'Like Icon - Post'}
               />
             </button>
@@ -94,7 +94,7 @@ function Post() {
         </div>
         <div className="post-info">
           <p className="post-author">{author}</p>
-          <p className="post-date">
+          <p className="post-date" title={format(create_date, 'H:mm, dd/MM/y')}>
             {formatDistanceToNow(create_date, { addSuffix: true })}
           </p>
           <p className="post-likes">

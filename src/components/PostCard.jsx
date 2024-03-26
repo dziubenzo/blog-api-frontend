@@ -18,7 +18,7 @@ function PostCard({ post }) {
         <div className="likes-and-comments">
           <div className="likes-wrapper">
             <p className="likes-count">{likes}</p>
-            <img src="likes.svg" alt="Like Icon" />
+            <img src="like.svg" alt="Like Icon" />
           </div>
           <div className="comments-wrapper">
             <p className="comments-count">{comments}</p>
