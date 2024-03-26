@@ -30,6 +30,8 @@ function Post() {
   );
   // State for disabling Like/Unlike button until after the component is rerendered
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  // State for rerendering comments after adding a new one
+  const [commentsLength, setCommentsLength] = useState(postComments.length);
 
   // Render all comments
   function renderComments() {
@@ -108,15 +110,19 @@ function Post() {
         <div className="content">{content}</div>
       </div>
       <div className="comments">
-        {postComments.length ? (
-          <h2>Comments ({postComments.length})</h2>
+        {commentsLength ? (
+          <h2>Comments ({commentsLength})</h2>
         ) : (
           <h2>Be the first to comment!</h2>
         )}
         {renderComments()}
       </div>
       <div className="comment-form">
-        <CommentForm />
+        <CommentForm
+          postId={post._id}
+          commentsLength={commentsLength}
+          setCommentsLength={setCommentsLength}
+        />
       </div>
     </div>
   );
