@@ -2,6 +2,7 @@ import { Outlet, useLoaderData, useNavigation } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 import { useState } from 'react';
+import ThemeToggle from './ThemeToggle';
 
 function App() {
   const { state } = useNavigation();
@@ -25,6 +26,7 @@ function App() {
         )}
       </main>
       <footer>
+        <ThemeToggle />
         <Footer />
       </footer>
     </>
