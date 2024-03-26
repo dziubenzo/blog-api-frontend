@@ -8,11 +8,11 @@ export async function dataLoader() {
     if (!responsePosts.ok || !responseComments.ok) {
       throw new Error('Server error');
     }
-    const [posts, comments] = await Promise.all([
+    const [allPosts, allComments] = await Promise.all([
       await responsePosts.json(),
       await responseComments.json(),
     ]);
-    return { posts, comments };
+    return { allPosts, allComments };
   } catch (error) {
     return error;
   }

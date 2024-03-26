@@ -12,31 +12,34 @@ import CommentForm from './CommentForm';
 function Post() {
   // Get post slug
   const { postSlug } = useParams();
-  const [posts, comments] = useOutletContext();
+  const [posts, setPosts, comments, setComments] = useOutletContext();
   // Get post
   const [post] = posts.filter((post) => post.slug === postSlug);
   // Destructure post
-  const { title, content, author, create_date } = post;
+  const { title, content, author, create_date, likes } = post;
   // Get post comments
   const postComments = comments.filter((comment) => {
     return comment.post == post._id;
   });
 
-  // State for updating post likes count dynamically
-  const [postLikes, setPostLikes] = useState(post.likes);
   // State for determining whether or not the post is already liked
   const [isPostLiked, setIsPostLiked] = useState(
     checkIfElementLiked(post._id, 'likedPosts'),
   );
   // State for disabling Like/Unlike button until after the component is rerendered
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-  // State for rerendering comments after adding a new one
-  const [commentsLength, setCommentsLength] = useState(postComments.length);
 
   // Render all comments
   function renderComments() {
     return postComments.map((comment) => {
-      return <Comment key={comment._id} comment={comment} />;
+      return (
+        <Comment
+          key={comment._id}
+          comment={comment}
+          comments={comments}
+          setComments={setComments}
+        />
+      );
     });
   }
 
@@ -46,12 +49,22 @@ function Post() {
     try {
       // Disable button
       setIsButtonDisabled(true);
-      await fetch(`http://localhost:3000/posts/${post._id}/like`, {
+      const res = await fetch(`http://localhost:3000/posts/${post._id}/like`, {
         method: 'PUT',
       });
-      // Update both state and the posts object so that the main page is in sync without refresh
-      setPostLikes(postLikes + 1);
-      post.likes++;
+      if (!res.ok) {
+        throw new Error('Server error');
+      }
+      // Update posts state without mutation
+      setPosts(
+        posts.map((element) => {
+          if (element._id === post._id) {
+            return { ...element, likes: element.likes + 1 };
+          } else {
+            return element;
+          }
+        }),
+      );
       // Update localStorage and state
       addElementToLocalStorage(post._id, 'likedPosts');
       setIsPostLiked(true);
@@ -67,12 +80,25 @@ function Post() {
     try {
       // Disable button
       setIsButtonDisabled(true);
-      await fetch(`http://localhost:3000/posts/${post._id}/unlike`, {
-        method: 'PUT',
-      });
-      // Update both state and the posts object so that the main page is in sync without refresh
-      setPostLikes(postLikes - 1);
-      post.likes--;
+      const res = await fetch(
+        `http://localhost:3000/posts/${post._id}/unlike`,
+        {
+          method: 'PUT',
+        },
+      );
+      if (!res.ok) {
+        throw new Error('Server error');
+      }
+      // Update posts state without mutation
+      setPosts(
+        posts.map((element) => {
+          if (element._id === post._id) {
+            return { ...element, likes: element.likes - 1 };
+          } else {
+            return element;
+          }
+        }),
+      );
       // Update localStorage and state
       removeElementFromLocalStorage(post._id, 'likedPosts');
       setIsPostLiked(false);
@@ -101,7 +127,7 @@ function Post() {
             {formatDistanceToNow(create_date, { addSuffix: true })}
           </p>
           <p className="post-likes">
-            {postLikes} {postLikes === 1 ? 'like' : 'likes'}
+            {likes} {likes === 1 ? 'like' : 'likes'}
           </p>
         </div>
       </div>
@@ -110,8 +136,8 @@ function Post() {
         <div className="content">{content}</div>
       </div>
       <div className="comments">
-        {commentsLength ? (
-          <h2>Comments ({commentsLength})</h2>
+        {postComments.length ? (
+          <h2>Comments ({postComments.length})</h2>
         ) : (
           <h2>Be the first to comment!</h2>
         )}
@@ -120,8 +146,8 @@ function Post() {
       <div className="comment-form">
         <CommentForm
           postId={post._id}
-          commentsLength={commentsLength}
-          setCommentsLength={setCommentsLength}
+          comments={comments}
+          setComments={setComments}
         />
       </div>
     </div>

@@ -1,9 +1,7 @@
 import PropTypes from 'prop-types';
 import { useRef } from 'react';
-import { useOutletContext } from 'react-router-dom';
 
-function CommentForm({ postId, commentsLength, setCommentsLength }) {
-  const [posts, comments] = useOutletContext();
+function CommentForm({ postId, comments, setComments }) {
   // Reference to the form
   const formRef = useRef(null);
 
@@ -30,10 +28,8 @@ function CommentForm({ postId, commentsLength, setCommentsLength }) {
         throw new Error('Server error');
       }
       const newComment = await res.json();
-      // Add comment to the beginning of the comments array
-      comments.unshift(newComment);
-      // Change state to trigger rerender
-      setCommentsLength(commentsLength + 1);
+      // Update comments state without mutation
+      setComments([newComment, ...comments]);
       // Clear form fields
       formRef.current.reset();
     } catch (error) {
@@ -77,8 +73,8 @@ function CommentForm({ postId, commentsLength, setCommentsLength }) {
 
 CommentForm.propTypes = {
   postId: PropTypes.string,
-  commentsLength: PropTypes.number,
-  setCommentsLength: PropTypes.func,
+  comments: PropTypes.array,
+  setComments: PropTypes.func,
 };
 
 export default CommentForm;

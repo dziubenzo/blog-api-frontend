@@ -1,11 +1,16 @@
 import { Outlet, useLoaderData, useNavigation } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
+import { useState } from 'react';
 
 function App() {
   const { state } = useNavigation();
   const isLoading = state === 'loading';
-  const { posts, comments } = useLoaderData();
+  const { allPosts, allComments } = useLoaderData();
+
+  // Make posts and comments state for reactivity
+  const [posts, setPosts] = useState(allPosts);
+  const [comments, setComments] = useState(allComments);
 
   return (
     <>
@@ -16,7 +21,7 @@ function App() {
         {isLoading ? (
           <h1>Loading posts...</h1>
         ) : (
-          <Outlet context={[posts, comments]} />
+          <Outlet context={[posts, setPosts, comments, setComments]} />
         )}
       </main>
       <footer>

@@ -2,7 +2,7 @@ import { useOutletContext } from 'react-router-dom';
 import PostCard from './PostCard';
 
 function Posts() {
-  const [posts, comments] = useOutletContext();
+  const [posts, setPosts, comments, setComments] = useOutletContext();
 
   function renderPostCards() {
     return posts.map((post) => {

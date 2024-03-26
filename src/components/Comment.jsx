@@ -7,14 +7,12 @@ import {
   removeElementFromLocalStorage,
 } from '../helpers';
 
-function Comment({ comment }) {
+function Comment({ comment, comments, setComments }) {
   // Destructure comment into useful parts
-  const { author, content, create_date, avatar_colour, post } = comment;
+  const { author, post, content, create_date, avatar_colour, likes } = comment;
   // Get first letter of nickname and uppercase it
   const firstLetter = author[0].toUpperCase();
 
-  // State for updating comment likes count dynamically
-  const [commentLikes, setCommentLikes] = useState(comment.likes);
   // State for determining whether or not the comment is already liked
   const [isCommentLiked, setIsCommentLiked] = useState(
     checkIfElementLiked(comment._id, 'likedComments'),
@@ -28,14 +26,26 @@ function Comment({ comment }) {
     try {
       // Disable button
       setIsButtonDisabled(true);
-      await fetch(
+      const res = await fetch(
         `http://localhost:3000/posts/${post}/comments/${comment._id}/like`,
         {
           method: 'PUT',
         },
       );
-      // Update localStorage and state
-      setCommentLikes(commentLikes + 1);
+      if (!res.ok) {
+        throw new Error('Server error');
+      }
+      // Update comments state without mutation
+      setComments(
+        comments.map((element) => {
+          if (element._id === comment._id) {
+            return { ...element, likes: element.likes + 1 };
+          } else {
+            return element;
+          }
+        }),
+      );
+      // Update localStorage
       addElementToLocalStorage(comment._id, 'likedComments');
       setIsCommentLiked(true);
       setIsButtonDisabled(false);
@@ -50,14 +60,26 @@ function Comment({ comment }) {
     try {
       // Disable button
       setIsButtonDisabled(true);
-      await fetch(
+      const res = await fetch(
         `http://localhost:3000/posts/${post}/comments/${comment._id}/unlike`,
         {
           method: 'PUT',
         },
       );
-      // Update localStorage and state
-      setCommentLikes(commentLikes - 1);
+      if (!res.ok) {
+        throw new Error('Server error');
+      }
+      // Update comments state without mutation
+      setComments(
+        comments.map((element) => {
+          if (element._id === comment._id) {
+            return { ...element, likes: element.likes - 1 };
+          } else {
+            return element;
+          }
+        }),
+      );
+      // Update localStorage
       removeElementFromLocalStorage(comment._id, 'likedComments');
       setIsCommentLiked(false);
       setIsButtonDisabled(false);
@@ -76,7 +98,7 @@ function Comment({ comment }) {
         <p className="comment-content">{content}</p>
         <p className="comment-time">{format(create_date, 'H:mm, dd/MM/y')}</p>
         <p className="comment-likes">
-          {commentLikes} {commentLikes === 1 ? 'like' : 'likes'}
+          {likes} {likes === 1 ? 'like' : 'likes'}
         </p>
       </div>
       <div className="like-comment">
@@ -100,6 +122,8 @@ function Comment({ comment }) {
 
 Comment.propTypes = {
   comment: PropTypes.object,
+  comments: PropTypes.array,
+  setComments: PropTypes.func,
 };
 
 export default Comment;
