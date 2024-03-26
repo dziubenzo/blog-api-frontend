@@ -44,3 +44,24 @@ export function removeElementFromLocalStorage(id, element) {
   const newLikedElements = likedElements.filter((storedId) => storedId !== id);
   localStorage.setItem(element, JSON.stringify(newLikedElements));
 }
+
+// Check localStorage for theme value
+// Set html darkMode attribute to it if it exists
+export function getThemeFromLocalStorage() {
+  if (!localStorage.getItem('dark-mode')) {
+    localStorage.setItem('dark-mode', 'true');
+    return true;
+  } else {
+    const theme = localStorage.getItem('dark-mode');
+    const htmlElement = document.querySelector('html');
+    htmlElement.setAttribute('dark-mode', theme);
+    return theme === 'true' ? true : false;
+  }
+}
+
+// Change html darkMode attribute and write current theme value to localStorage
+export function changeTheme(value) {
+  const htmlElement = document.querySelector('html');
+  htmlElement.setAttribute('dark-mode', value);
+  localStorage.setItem('dark-mode', value);
+}
