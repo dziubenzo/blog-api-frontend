@@ -146,11 +146,12 @@ main {
 
 .like-post {
   button {
-    width: 48px;
+    height: 48px;
     border: none;
   }
 
   img {
+    height: 48px;
     background-color: initial;
     filter: $primary-colour-icon;
     cursor: pointer;
@@ -227,6 +228,11 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  button {
+    height: 32px;
+    border: none;
+  }
 
   img {
     height: 32px;
