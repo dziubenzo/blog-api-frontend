@@ -18,29 +18,29 @@ export async function dataLoader() {
   }
 }
 
-// Check localStorage for whether or not a post is liked
-export function checkIfPostLiked(postId) {
+// Check localStorage for whether or not a post/comment is liked
+export function checkIfElementLiked(id, element) {
   // Create an empty array if it is the first visit to the post page
-  if (!localStorage.getItem('likedPosts')) {
-    localStorage.setItem('likedPosts', JSON.stringify([]));
+  if (!localStorage.getItem(element)) {
+    localStorage.setItem(element, JSON.stringify([]));
     return false;
   }
-  // Return true if post id is in it
+  // Return true if post/comment id is in it
   // Return false if it isn't
-  const likedPosts = JSON.parse(localStorage.getItem('likedPosts'));
-  return likedPosts.includes(postId) ? true : false;
+  const likedElements = JSON.parse(localStorage.getItem(element));
+  return likedElements.includes(id) ? true : false;
 }
 
-// Add liked post to localStorage (like post action)
-export function addPostToLocalStorage(postId) {
-  const likedPosts = JSON.parse(localStorage.getItem('likedPosts'));
-  likedPosts.push(postId);
-  localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+// Add liked post/comment to localStorage (like action)
+export function addElementToLocalStorage(id, element) {
+  const likedElements = JSON.parse(localStorage.getItem(element));
+  likedElements.push(id);
+  localStorage.setItem(element, JSON.stringify(likedElements));
 }
 
-// Remove liked post from localStorage (unlike post action)
-export function removePostFromLocalStorage(postId) {
-  const likedPosts = JSON.parse(localStorage.getItem('likedPosts'));
-  const newLikedPosts = likedPosts.filter((storedId) => storedId !== postId);
-  localStorage.setItem('likedPosts', JSON.stringify(newLikedPosts));
+// Remove liked post/comment from localStorage (unlike action)
+export function removeElementFromLocalStorage(id, element) {
+  const likedElements = JSON.parse(localStorage.getItem(element));
+  const newLikedElements = likedElements.filter((storedId) => storedId !== id);
+  localStorage.setItem(element, JSON.stringify(newLikedElements));
 }

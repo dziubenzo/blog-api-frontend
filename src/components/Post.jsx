@@ -3,9 +3,9 @@ import { formatDistanceToNow } from 'date-fns';
 import Comment from './Comment';
 import { useState } from 'react';
 import {
-  addPostToLocalStorage,
-  checkIfPostLiked,
-  removePostFromLocalStorage,
+  addElementToLocalStorage,
+  checkIfElementLiked,
+  removeElementFromLocalStorage,
 } from '../helpers';
 
 function Post() {
@@ -24,7 +24,9 @@ function Post() {
   // State for updating post likes count dynamically
   const [postLikes, setPostLikes] = useState(post.likes);
   // State for determining whether or not the post is already liked
-  const [isPostLiked, setIsPostLiked] = useState(checkIfPostLiked(post._id));
+  const [isPostLiked, setIsPostLiked] = useState(
+    checkIfElementLiked(post._id, 'likedPosts'),
+  );
   // State for disabling Like/Unlike button until after the component is rerendered
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
@@ -48,7 +50,7 @@ function Post() {
       setPostLikes(postLikes + 1);
       post.likes++;
       // Update localStorage and state
-      addPostToLocalStorage(post._id);
+      addElementToLocalStorage(post._id, 'likedPosts');
       setIsPostLiked(true);
       setIsButtonDisabled(false);
     } catch (error) {
@@ -69,7 +71,7 @@ function Post() {
       setPostLikes(postLikes - 1);
       post.likes--;
       // Update localStorage and state
-      removePostFromLocalStorage(post._id);
+      removeElementFromLocalStorage(post._id, 'likedPosts');
       setIsPostLiked(false);
       setIsButtonDisabled(false);
     } catch (error) {
