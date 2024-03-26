@@ -1,9 +1,12 @@
 import PropTypes from 'prop-types';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 function CommentForm({ postId, comments, setComments }) {
   // Reference to the form
   const formRef = useRef(null);
+
+  // State for indicating that a comment has been successfully posted
+  const [isCommentCreated, setIsCommentCreated] = useState(false);
 
   // Add comment to DB
   async function addComment(event) {
@@ -32,42 +35,56 @@ function CommentForm({ postId, comments, setComments }) {
       setComments([newComment, ...comments]);
       // Clear form fields
       formRef.current.reset();
+      // Show success message to user for 3 seconds
+      setIsCommentCreated(true);
+      setTimeout(() => {
+        setIsCommentCreated(false);
+      }, 3000);
     } catch (error) {
       throw new Error(error);
     }
   }
   return (
-    <form ref={formRef} method="post" onSubmit={addComment}>
-      <fieldset>
-        <legend>Add Comment</legend>
-        <label htmlFor="author">Nickname:</label>
-        <input
-          type="text"
-          name="author"
-          id="author"
-          minLength="3"
-          maxLength="64"
-          required
-        />
-        <label htmlFor="content">Text:</label>
-        <textarea
-          name="content"
-          id="content"
-          rows="6"
-          minLength="3"
-          maxLength="320"
-          required
-        ></textarea>
-        <label htmlFor="avatar-colour">Avatar Colour:</label>
-        <input
-          type="color"
-          name="avatar_colour"
-          id="avatar-colour"
-          defaultValue="#FFB937"
-        />
-        <button type="submit">Send</button>
-      </fieldset>
-    </form>
+    <>
+      {isCommentCreated ? (
+        <>
+          <h2>Comment posted successfully!</h2>
+          <h2>Form will be back in 3 seconds...</h2>
+        </>
+      ) : (
+        <form ref={formRef} method="post" onSubmit={addComment}>
+          <fieldset>
+            <legend>Add Comment</legend>
+            <label htmlFor="author">Nickname:</label>
+            <input
+              type="text"
+              name="author"
+              id="author"
+              minLength="3"
+              maxLength="64"
+              required
+            />
+            <label htmlFor="content">Text:</label>
+            <textarea
+              name="content"
+              id="content"
+              rows="6"
+              minLength="3"
+              maxLength="320"
+              required
+            ></textarea>
+            <label htmlFor="avatar-colour">Avatar Colour:</label>
+            <input
+              type="color"
+              name="avatar_colour"
+              id="avatar-colour"
+              defaultValue="#FFB937"
+            />
+            <button type="submit">Send</button>
+          </fieldset>
+        </form>
+      )}
+    </>
   );
 }
 

@@ -206,6 +206,7 @@ main {
   flex-direction: column;
   gap: 8px;
   width: 100%;
+  max-width: 500px;
 
   .comment-author {
     font-weight: 600;
@@ -239,6 +240,12 @@ main {
     background-color: initial;
     filter: $primary-colour-icon;
     cursor: pointer;
+  }
+}
+
+.comment-form {
+  h2 {
+    text-align: center;
   }
 }
 
