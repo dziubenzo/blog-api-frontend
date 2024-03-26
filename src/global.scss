@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
+/* 
+Variables
+*/
+
 $background-colour: #0a1828;
 $primary-colour: #bfa181;
 $primary-colour-icon: invert(72%) sepia(13%) saturate(801%) hue-rotate(350deg)
@@ -12,6 +16,19 @@ $postcard-shadow-dark-theme:
   rgba(255, 255, 255, 0.1) 0px 8px 24px,
   rgba(255, 255, 255, 0.1) 0px 16px 56px,
   rgba(255, 255, 255, 0.1) 0px 24px 80px;
+
+/* 
+Animations
+*/
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
 
 * {
   margin: 0;
@@ -148,6 +165,7 @@ main {
   button {
     height: 48px;
     border: none;
+    animation: pulse 1s infinite ease-in alternate;
   }
 
   img {
@@ -233,6 +251,7 @@ main {
   button {
     height: 32px;
     border: none;
+    animation: pulse 1s infinite ease-in alternate;
   }
 
   img {
@@ -299,6 +318,7 @@ fieldset {
 /* 
 Hover effects
  */
+
 @media (hover: 'hover') {
   footer {
     span {
@@ -331,6 +351,26 @@ Hover effects
       transform: scale(1.03);
       outline: 3px solid $secondary-colour;
       box-shadow: $postcard-shadow-dark-theme;
+    }
+  }
+
+  fieldset {
+    button {
+      transition: all 0.2s ease-in;
+
+      &:hover {
+        background-color: $secondary-colour;
+        color: $background-colour;
+      }
+    }
+  }
+
+  .like-post,
+  .like-comment {
+    img {
+      &:hover {
+        filter: $secondary-colour-icon;
+      }
     }
   }
 }
