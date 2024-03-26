@@ -4,18 +4,18 @@
 Variables
 */
 
-$background-colour: #0a1828;
-$primary-colour: #bfa181;
-$primary-colour-icon: invert(72%) sepia(13%) saturate(801%) hue-rotate(350deg)
-  brightness(91%) contrast(86%);
-$secondary-colour: #178582;
-$secondary-colour-icon: invert(42%) sepia(68%) saturate(454%) hue-rotate(129deg)
-  brightness(89%) contrast(98%);
-$font-family: 'Work Sans', sans-serif;
-$postcard-shadow-dark-theme:
-  rgba(255, 255, 255, 0.1) 0px 8px 24px,
-  rgba(255, 255, 255, 0.1) 0px 16px 56px,
-  rgba(255, 255, 255, 0.1) 0px 24px 80px;
+html[dark-mode='true'] {
+  --background-colour: #0a1828;
+  --primary-colour: #bfa181;
+  --primary-colour-icon: invert(72%) sepia(13%) saturate(801%)
+    hue-rotate(350deg) brightness(91%) contrast(86%);
+  --secondary-colour: #178582;
+  --secondary-colour-icon: invert(42%) sepia(68%) saturate(454%)
+    hue-rotate(129deg) brightness(89%) contrast(98%);
+  --postcard-shadow-dark-theme: rgba(255, 255, 255, 0.1) 0px 8px 24px,
+    rgba(255, 255, 255, 0.1) 0px 16px 56px,
+    rgba(255, 255, 255, 0.1) 0px 24px 80px;
+}
 
 /* 
 Animations
@@ -34,9 +34,9 @@ Animations
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: $background-colour;
-  color: $primary-colour;
-  font-family: $font-family;
+  background-color: var(--background-colour);
+  color: var(--primary-colour);
+  font-family: 'Work Sans', 'sans-serif';
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
@@ -65,7 +65,7 @@ header {
 
   a {
     text-underline-offset: 0.35em;
-    text-decoration-color: $secondary-colour;
+    text-decoration-color: var(--secondary-colour);
   }
 
   .app-name {
@@ -103,7 +103,7 @@ main {
 }
 
 .post-card {
-  outline: 2px solid $secondary-colour;
+  outline: 2px solid var(--secondary-colour);
   border-radius: 8px;
   padding: 1em;
   cursor: pointer;
@@ -146,7 +146,7 @@ main {
   img {
     height: 24px;
     background-color: initial;
-    filter: $primary-colour-icon;
+    filter: var(--primary-colour-icon);
   }
 }
 
@@ -171,7 +171,7 @@ main {
   img {
     height: 48px;
     background-color: initial;
-    filter: $primary-colour-icon;
+    filter: var(--primary-colour-icon);
     cursor: pointer;
   }
 }
@@ -257,7 +257,7 @@ main {
   img {
     height: 32px;
     background-color: initial;
-    filter: $primary-colour-icon;
+    filter: var(--primary-colour-icon);
     cursor: pointer;
   }
 }
@@ -274,7 +274,7 @@ fieldset {
   gap: 16px;
   align-items: center;
   padding: 1em;
-  border-color: $secondary-colour;
+  border-color: var(--secondary-colour);
   border-radius: 8px;
 
   legend {
@@ -283,7 +283,7 @@ fieldset {
 
   input[type='text'],
   textarea {
-    border: 1px solid $secondary-colour;
+    border: 1px solid var(--secondary-colour);
     padding: 0.5em;
     font-size: 1rem;
     border-radius: 8px;
@@ -306,7 +306,7 @@ fieldset {
 
   button {
     grid-column: 1/3;
-    border: 2px solid $secondary-colour;
+    border: 2px solid var(--secondary-colour);
     padding: 0.5em;
     font-size: 1.2rem;
     font-weight: 600;
@@ -346,14 +346,14 @@ fieldset {
     width: 16px;
     left: 4px;
     bottom: 4px;
-    background-color: $background-colour;
+    background-color: var(--background-colour);
     transition: 0.4s;
     border-radius: 50%;
   }
 }
 
 input:checked + .slider {
-  background-color: $secondary-colour;
+  background-color: var(--secondary-colour);
 }
 
 input:checked + .slider:before {
@@ -373,7 +373,7 @@ Hover effects
       &:hover {
         transform: rotate(13deg) scale(1.3);
         background: transparent;
-        color: $secondary-colour;
+        color: var(--secondary-colour);
         cursor: default;
       }
     }
@@ -384,7 +384,7 @@ Hover effects
       transition: all 0.2s ease-in;
 
       &:hover {
-        color: $secondary-colour;
+        color: var(--secondary-colour);
       }
     }
   }
@@ -394,8 +394,8 @@ Hover effects
 
     &:hover {
       transform: scale(1.03);
-      outline: 3px solid $secondary-colour;
-      box-shadow: $postcard-shadow-dark-theme;
+      outline: 3px solid var(--secondary-colour);
+      box-shadow: var(--postcard-shadow-dark-theme);
     }
   }
 
@@ -404,8 +404,8 @@ Hover effects
       transition: all 0.2s ease-in;
 
       &:hover {
-        background-color: $secondary-colour;
-        color: $background-colour;
+        background-color: var(--secondary-colour);
+        color: var(--background-colour);
       }
     }
   }
@@ -414,7 +414,7 @@ Hover effects
   .like-comment {
     img {
       &:hover {
-        filter: $secondary-colour-icon;
+        filter: var(--secondary-colour-icon);
       }
     }
   }
