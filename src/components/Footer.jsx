@@ -1,4 +1,6 @@
-function Footer() {
+import PropTypes from 'prop-types';
+
+function Footer({ isDarkMode }) {
   return (
     <>
       <p>
@@ -10,10 +12,17 @@ function Footer() {
         rel="noopener noreferrer"
         aria-label="Developer's GitHub page, opens in new tab"
       >
-        <img src="github-dark-theme.svg" alt="GitHub Logo" />
+        <img
+          src={isDarkMode ? 'github-dark-theme.svg' : 'github-light-theme.svg'}
+          alt="GitHub Logo"
+        />
       </a>
     </>
   );
 }
+
+Footer.propTypes = {
+  isDarkMode: PropTypes.bool,
+};
 
 export default Footer;

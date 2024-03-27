@@ -27,6 +27,11 @@ html[dark-mode='false'] {
     hue-rotate(304deg) brightness(120%) contrast(99%);
   --postcard-shadow-dark-theme: rgba(17, 17, 26, 0.1) 0px 8px 24px,
     rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+
+  .comment-avatar {
+    background-color: var(--primary-colour);
+    outline-color: var(--background-colour);
+  }
 }
 
 /* 
@@ -347,7 +352,7 @@ fieldset {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: var(--secondary-colour);
   transition: 0.4s;
   border-radius: 34px;
 

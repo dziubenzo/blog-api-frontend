@@ -3,6 +3,7 @@ import Header from './Header';
 import Footer from './Footer';
 import { useState } from 'react';
 import ThemeToggle from './ThemeToggle';
+import { getThemeFromLocalStorage } from '../helpers';
 
 function App() {
   const { state } = useNavigation();
@@ -12,6 +13,9 @@ function App() {
   // Make posts and comments state for reactivity
   const [posts, setPosts] = useState(allPosts);
   const [comments, setComments] = useState(allComments);
+
+  // State for manipulating app colour theme
+  const [isDarkMode, setIsDarkMode] = useState(getThemeFromLocalStorage);
 
   return (
     <>
@@ -26,8 +30,8 @@ function App() {
         )}
       </main>
       <footer>
-        <ThemeToggle />
-        <Footer />
+        <ThemeToggle isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
+        <Footer isDarkMode={isDarkMode} />
       </footer>
     </>
   );

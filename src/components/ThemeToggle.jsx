@@ -1,9 +1,7 @@
-import { useState } from 'react';
-import { changeTheme, getThemeFromLocalStorage } from '../helpers';
+import { changeTheme } from '../helpers';
+import PropTypes from 'prop-types';
 
-function ThemeToggle() {
-  const [isDarkMode, setIsDarkMode] = useState(getThemeFromLocalStorage());
-
+function ThemeToggle({ isDarkMode, setIsDarkMode }) {
   return (
     <>
       <label className="switch" aria-label="Light/Dark Mode Toggle">
@@ -20,5 +18,10 @@ function ThemeToggle() {
     </>
   );
 }
+
+ThemeToggle.propTypes = {
+  isDarkMode: PropTypes.bool,
+  setIsDarkMode: PropTypes.func,
+};
 
 export default ThemeToggle;
