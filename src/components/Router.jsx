@@ -9,16 +9,18 @@ function Router() {
   const router = createBrowserRouter([
     {
       element: <App />,
-      errorElement: <ErrorPage />,
       loader: dataLoader,
+      errorElement: <ErrorPage />,
       children: [
         {
           path: '/',
           element: <Posts />,
+          errorElement: <ErrorPage />,
         },
         {
           path: ':postSlug',
           element: <Post />,
+          errorElement: <ErrorPage />,
         },
       ],
     },
