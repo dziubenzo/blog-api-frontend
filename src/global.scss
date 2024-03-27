@@ -17,6 +17,18 @@ html[dark-mode='true'] {
     rgba(255, 255, 255, 0.1) 0px 24px 80px;
 }
 
+html[dark-mode='false'] {
+  --background-colour: #ddd0c8;
+  --primary-colour: #323232;
+  --primary-colour-icon: invert(16%) sepia(0%) saturate(0%) hue-rotate(199deg)
+    brightness(100%) contrast(89%);
+  --secondary-colour: #4f0341;
+  --secondary-colour-icon: invert(3%) sepia(96%) saturate(5731%)
+    hue-rotate(304deg) brightness(120%) contrast(99%);
+  --postcard-shadow-dark-theme: rgba(17, 17, 26, 0.1) 0px 8px 24px,
+    rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+}
+
 /* 
 Animations
 */
@@ -368,9 +380,9 @@ Hover effects
   footer {
     span {
       display: inline-block;
-      transition: all 0.2s ease-in;
 
       &:hover {
+        transition: all 0.2s ease-in;
         transform: rotate(13deg) scale(1.3);
         background: transparent;
         color: var(--secondary-colour);
@@ -381,29 +393,25 @@ Hover effects
 
   header {
     a {
-      transition: all 0.2s ease-in;
-
       &:hover {
+        transition: all 0.2s ease-in;
         color: var(--secondary-colour);
       }
     }
   }
 
   .post-card {
-    transition: all 0.2s ease-in;
-
     &:hover {
+      transition: all 0.2s ease-in;
       transform: scale(1.03);
-      outline: 3px solid var(--secondary-colour);
       box-shadow: var(--postcard-shadow-dark-theme);
     }
   }
 
   fieldset {
     button {
-      transition: all 0.2s ease-in;
-
       &:hover {
+        transition: all 0.2s ease-in;
         background-color: var(--secondary-colour);
         color: var(--background-colour);
       }
