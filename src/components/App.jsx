@@ -15,7 +15,7 @@ function App() {
   const [comments, setComments] = useState(allComments);
 
   // State for manipulating app colour theme
-  const [isDarkMode, setIsDarkMode] = useState(getThemeFromLocalStorage);
+  const [isDarkMode, setIsDarkMode] = useState(getThemeFromLocalStorage());
 
   return (
     <>

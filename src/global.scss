@@ -73,7 +73,7 @@ body {
   grid-template-rows: min-content auto min-content;
   place-items: center;
   min-height: 100svh;
-  max-width: 1200px;
+  max-width: 1000px;
   padding: 1em;
 }
 
@@ -135,12 +135,13 @@ main {
 
   .content {
     font-style: italic;
-    white-space: nowrap;
+    text-align: justify;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
     overflow: hidden;
-    text-overflow: ellipsis;
   }
 
-  .content,
   .author,
   .created-date {
     padding: 0.5em 0;
