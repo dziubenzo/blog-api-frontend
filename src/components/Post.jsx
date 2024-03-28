@@ -8,6 +8,7 @@ import {
   removeElementFromLocalStorage,
 } from '../helpers';
 import CommentForm from './CommentForm';
+import parse from 'html-react-parser';
 
 function Post() {
   // Get post slug
@@ -132,8 +133,8 @@ function Post() {
         </div>
       </div>
       <div className="post">
-        <h1>{title}</h1>
-        <div className="content">{content}</div>
+        <h1 className="post-title">{title}</h1>
+        <div className="content">{parse(content)}</div>
       </div>
       <div className="comments">
         {postComments.length ? (
