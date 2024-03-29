@@ -2,7 +2,7 @@ import { useOutletContext } from 'react-router-dom';
 import PostCard from './PostCard';
 
 function Posts() {
-  const [posts, setPosts, comments, setComments] = useOutletContext();
+  const { posts, comments } = useOutletContext();
 
   function renderPostCards() {
     return posts.map((post) => {
@@ -20,7 +20,18 @@ function Posts() {
     });
   }
 
-  return <div className="posts">{renderPostCards()}</div>;
+  return (
+    <>
+      {!posts.length ? (
+        <>
+          <h2 className="no-posts-message">No posts.</h2>
+          <h2 className="no-posts-message">That&apos;s bad!</h2>
+        </>
+      ) : (
+        <div className="posts">{renderPostCards()}</div>
+      )}
+    </>
+  );
 }
 
 export default Posts;

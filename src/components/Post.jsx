@@ -13,11 +13,11 @@ import parse from 'html-react-parser';
 function Post() {
   // Get post slug
   const { postSlug } = useParams();
-  const [posts, setPosts, comments, setComments] = useOutletContext();
+  const { posts, setPosts, comments, setComments } = useOutletContext();
   // Get post
   const [post] = posts.filter((post) => post.slug === postSlug);
   // Destructure post
-  const { title, content, author, create_date, likes } = post;
+  const { title, content, author, create_date, update_date, likes } = post;
   // Get post comments
   const postComments = comments.filter((comment) => {
     return comment.post == post._id;
@@ -124,8 +124,12 @@ function Post() {
         </div>
         <div className="post-info">
           <p className="post-author">{author}</p>
-          <p className="post-date" title={format(create_date, 'H:mm, dd/MM/y')}>
-            {formatDistanceToNow(create_date, { addSuffix: true })}
+          <p>{format(create_date, 'd MMMM y')}</p>
+          <p title={format(update_date, 'd MMMM y')}>
+            edited
+            <span>
+              {' ' + formatDistanceToNow(update_date, { addSuffix: true })}
+            </span>
           </p>
           <p className="post-likes">
             {likes} {likes === 1 ? 'like' : 'likes'}
@@ -138,7 +142,7 @@ function Post() {
       </div>
       <div className="comments">
         {postComments.length ? (
-          <h2>Comments ({postComments.length})</h2>
+          <h2 className="comments-heading">Comments ({postComments.length})</h2>
         ) : (
           <h2>Be the first to comment!</h2>
         )}

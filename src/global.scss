@@ -112,11 +112,16 @@ footer {
 
 main {
   margin: 3em 0;
+
+  .no-posts-message,
+  .loading-message {
+    text-align: center;
+  }
 }
 
 .posts {
   display: grid;
-  gap: 48px;
+  gap: 32px;
 
   a {
     text-decoration: none;
@@ -154,10 +159,15 @@ main {
     font-weight: 700;
   }
 
+  .likes-count,
+  .comments-count {
+    font-size: 1.2rem;
+  }
+
   .likes-and-comments {
     display: flex;
     justify-content: center;
-    gap: 8px;
+    gap: 16px;
     margin-top: 2em;
   }
 
@@ -175,7 +185,7 @@ main {
 
 .post-wrapper {
   display: grid;
-  gap: 64px;
+  gap: 48px;
 }
 
 .post-info-wrapper {
@@ -202,10 +212,10 @@ main {
 .post-info {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
   text-align: right;
 
-  .post-date {
+  span {
     font-style: italic;
   }
 }
@@ -253,10 +263,11 @@ main {
 .comments {
   display: grid;
   gap: 32px;
-  width: 500px;
+  width: 700px;
   justify-self: center;
 
-  h2 {
+  .comments-heading {
+    font-weight: 600;
     text-align: center;
   }
 }
@@ -344,6 +355,10 @@ fieldset {
 
   legend {
     padding: 0 0.5em;
+  }
+
+  label {
+    cursor: pointer;
   }
 
   input[type='text'],
@@ -461,7 +476,7 @@ Hover effects
   .post-card {
     &:hover {
       transition: all 0.2s ease-in;
-      transform: scale(1.03);
+      transform: scale(1.02);
       box-shadow: var(--postcard-shadow-dark-theme);
     }
   }
@@ -507,6 +522,10 @@ Mobile media query
   .comments {
     gap: 16px;
     width: 100%;
+
+    .comments-heading {
+      margin-bottom: 0.5em;
+    }
   }
 
   .comment {

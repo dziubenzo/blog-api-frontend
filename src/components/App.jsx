@@ -24,9 +24,9 @@ function App() {
       </header>
       <main>
         {isLoading ? (
-          <h1>Loading posts...</h1>
+          <h1 className="loading-message">Loading posts...</h1>
         ) : (
-          <Outlet context={[posts, setPosts, comments, setComments]} />
+          <Outlet context={{ posts, setPosts, comments, setComments }} />
         )}
       </main>
       <footer>
