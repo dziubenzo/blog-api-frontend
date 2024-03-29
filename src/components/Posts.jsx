@@ -6,6 +6,10 @@ function Posts() {
 
   function renderPostCards() {
     return posts.map((post) => {
+      // Show only published posts
+      if (!post.published) {
+        return;
+      }
       // Get comments counts for each post
       const postComments = comments.filter(
         (comment) => comment.post === post._id,
