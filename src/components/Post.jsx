@@ -141,11 +141,11 @@ function Post() {
         <div className="content">{parse(content)}</div>
       </div>
       <div className="comments">
-        {postComments.length ? (
-          <h2 className="comments-heading">Comments ({postComments.length})</h2>
-        ) : (
-          <h2>Be the first to comment!</h2>
-        )}
+        <h2 className="comments-heading">
+          {postComments.length
+            ? `Comments (${postComments.length})`
+            : 'Be the first to comment!'}
+        </h2>
         {renderComments()}
       </div>
       <div className="comment-form">

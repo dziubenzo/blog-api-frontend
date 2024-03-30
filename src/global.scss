@@ -136,6 +136,7 @@ main {
 
   .title {
     font-weight: 600;
+    padding: 0.5em 0;
   }
 
   .content {
@@ -145,6 +146,7 @@ main {
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    line-height: 1.4;
   }
 
   .content,
