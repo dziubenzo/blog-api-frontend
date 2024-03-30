@@ -6,6 +6,7 @@ import {
   checkIfElementLiked,
   removeElementFromLocalStorage,
 } from '../helpers';
+import API_URL from '../API';
 
 function Comment({ comment, comments, setComments }) {
   // Destructure comment into useful parts
@@ -27,7 +28,7 @@ function Comment({ comment, comments, setComments }) {
       // Disable button
       setIsButtonDisabled(true);
       const res = await fetch(
-        `http://localhost:3000/posts/${post}/comments/${comment._id}/like`,
+        `${API_URL}/posts/${post}/comments/${comment._id}/like`,
         {
           method: 'PUT',
         },
@@ -61,7 +62,7 @@ function Comment({ comment, comments, setComments }) {
       // Disable button
       setIsButtonDisabled(true);
       const res = await fetch(
-        `http://localhost:3000/posts/${post}/comments/${comment._id}/unlike`,
+        `${API_URL}/posts/${post}/comments/${comment._id}/unlike`,
         {
           method: 'PUT',
         },

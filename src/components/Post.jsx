@@ -9,6 +9,7 @@ import {
 } from '../helpers';
 import CommentForm from './CommentForm';
 import parse from 'html-react-parser';
+import API_URL from '../API';
 
 function Post() {
   // Get post slug
@@ -50,7 +51,7 @@ function Post() {
     try {
       // Disable button
       setIsButtonDisabled(true);
-      const res = await fetch(`http://localhost:3000/posts/${post._id}/like`, {
+      const res = await fetch(`${API_URL}/posts/${post._id}/like`, {
         method: 'PUT',
       });
       if (!res.ok) {
@@ -81,12 +82,9 @@ function Post() {
     try {
       // Disable button
       setIsButtonDisabled(true);
-      const res = await fetch(
-        `http://localhost:3000/posts/${post._id}/unlike`,
-        {
-          method: 'PUT',
-        },
-      );
+      const res = await fetch(`${API_URL}/posts/${post._id}/unlike`, {
+        method: 'PUT',
+      });
       if (!res.ok) {
         throw new Error('Server error');
       }

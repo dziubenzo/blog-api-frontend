@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ErrorPage from './ErrorPage';
 import Posts from './Posts';
-import { dataLoader } from '../helpers';
+import dataLoader from '../loaders';
 import App from './App';
 import Post from './Post';
 

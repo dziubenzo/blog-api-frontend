@@ -1,23 +1,3 @@
-// Fetch all posts and comments
-export async function dataLoader() {
-  try {
-    const [responsePosts, responseComments] = await Promise.all([
-      fetch('http://localhost:3000/posts'),
-      fetch('http://localhost:3000/posts/all/comments/all'),
-    ]);
-    if (!responsePosts.ok || !responseComments.ok) {
-      throw new Error('Server error');
-    }
-    const [allPosts, allComments] = await Promise.all([
-      await responsePosts.json(),
-      await responseComments.json(),
-    ]);
-    return { allPosts, allComments };
-  } catch (error) {
-    return error;
-  }
-}
-
 // Check localStorage for whether or not a post/comment is liked
 export function checkIfElementLiked(id, element) {
   // Create an empty array if it is the first visit to the post page

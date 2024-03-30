@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useRef, useState } from 'react';
+import API_URL from '../API';
 
 function CommentForm({ postId, comments, setComments }) {
   // Reference to the form
@@ -19,14 +20,11 @@ function CommentForm({ postId, comments, setComments }) {
       avatar_colour: formData.get('avatar_colour'),
     };
     try {
-      const res = await fetch(
-        `http://localhost:3000/posts/${postId}/comments`,
-        {
-          method: 'POST',
-          body: JSON.stringify(newCommentData),
-          headers: { 'Content-Type': 'application/json' },
-        },
-      );
+      const res = await fetch(`${API_URL}/posts/${postId}/comments`, {
+        method: 'POST',
+        body: JSON.stringify(newCommentData),
+        headers: { 'Content-Type': 'application/json' },
+      });
       if (!res.ok) {
         throw new Error('Server error');
       }
