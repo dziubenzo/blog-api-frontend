@@ -1,7 +1,7 @@
 import { Outlet, useLoaderData, useNavigation } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ThemeToggle from './ThemeToggle';
 import { getThemeFromLocalStorage } from '../helpers';
 
@@ -13,6 +13,12 @@ function App() {
   // Make posts and comments state for reactivity
   const [posts, setPosts] = useState(allPosts);
   const [comments, setComments] = useState(allComments);
+
+  // Update state whenever there are changes to content on the Admin site
+  useEffect(() => {
+    setPosts(allPosts);
+    setComments(allComments);
+  }, [allPosts, allComments]);
 
   // State for manipulating app colour theme
   const [isDarkMode, setIsDarkMode] = useState(getThemeFromLocalStorage());
